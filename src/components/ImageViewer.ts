@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 
 import * as classNames from "classnames";
 import * as Lightbox from "react-image-lightbox";
@@ -16,7 +16,8 @@ interface ImageViewerProps {
     style?: object;
     responsive: boolean;
     onClickOption?: onClickOptions;
-    getRef?: (node: HTMLElement) => void;
+    getRef?: (node: HTMLDivElement) => void;
+    onClick?: () => void;
 }
 
 interface ImageViewerState {
@@ -35,7 +36,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     render() {
-        return DOM.div(
+        return createElement("div",
             {
                 className: classNames(
                     "widget-image-viewer",
@@ -45,7 +46,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 ),
                 ref: this.props.getRef
             },
-            DOM.img({
+            createElement("img", {
                 onClick: this.toggleLightBox,
                 src: this.props.imageUrl,
                 style: {
@@ -66,14 +67,16 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
             this.setState({
                 isOpen: !this.state.isOpen
             });
+        } else if (this.props.onClick) {
+            this.props.onClick();
         }
     }
 
     private getStyle(value: string | number, type: string): number | string {
+        // when type is auto default browser styles applies
         if (type === "pixels") {
             return value;
-        }
-        if (type === "percentage") {
+        } else if (type === "percentage") {
             return value + "%";
         }
 

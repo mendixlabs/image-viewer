@@ -17,8 +17,8 @@ https://imageviewer.mxapps.io/
 
 ## Usage
 The widget requires a context.
- ### Data source: System image
- - On the Data source option of the Data source tab, select the system image.
+ ### Data source: Dynamic image
+ - On the Data source option of the Data source tab, select the dynamic image.
  - The widget will pick the image from the context object (context object should inherit from system.image entity).
  - Refer to the appearnace section for configuring height and width.
 
@@ -55,7 +55,7 @@ To set up the development environment, run:
     
 Create a folder named dist in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/image-viewer/releases/download/1.0.0/TestImageViewer.mpk
+Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/image-viewer/releases/latest
 
     dist/MxTestProject
     

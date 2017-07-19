@@ -4,7 +4,7 @@ import ImageViewerContainer, { ImageViewerContainerProps } from "./components/Im
 import { Alert } from "./components/Alert";
 
 // tslint:disable-next-line
-const image = require("base64-image-loader!./img/Preview.jpg");
+const image = require("base64-image-loader!./img/imageviewerpreview.png");
 
 declare function require(name: string): string;
 
@@ -75,8 +75,19 @@ export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibi
     }
     if (valueMap.widthUnit === "auto") {
         visibilityMap.width = false;
-    } else if (valueMap.heightUnit === "auto") {
+    }
+    if (valueMap.heightUnit === "auto") {
         visibilityMap.height = false;
+    }
+    if (valueMap.onClickOption === "doNothing" || valueMap.onClickOption === "openFullScreen") {
+        visibilityMap.onClickMicroflow = false;
+        visibilityMap.onClickForm = false;
+    } else if (valueMap.onClickOption === "callMicroflow") {
+        visibilityMap.onClickMicroflow = true;
+        visibilityMap.onClickForm = false;
+    } else if (valueMap.onClickOption === "showPage") {
+        visibilityMap.onClickMicroflow = false;
+        visibilityMap.onClickForm = true;
     }
 
     return visibilityMap;
